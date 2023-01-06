@@ -18,7 +18,7 @@ struct CalculatorView: View {
     // ConverterView setup
     @State var showConverter: Bool = false
 
-    private var customRates: Int {
+    private var editedRates: Int {
         Calculate(basicRate: editorRates.editorBR,
                   limit_1: editorRates.editorL1,
                   limit_2: editorRates.editorL2,
@@ -29,6 +29,20 @@ struct CalculatorView: View {
                   levy: editorRates.editorLevy,
                   kwh: Double(kwhInput))
     }
+    
+    private var savedRates: Int {
+        Calculate(basicRate: UserDefaults.standard.double(forKey: "basicRate"),
+                  limit_1: UserDefaults.standard.double(forKey: "limit_1"),
+                  limit_2: UserDefaults.standard.double(forKey: "limit_2"),
+                  rate_1: UserDefaults.standard.double(forKey: "rate_1"),
+                  rate_2: UserDefaults.standard.double(forKey: "rate_2"),
+                  rate_3: UserDefaults.standard.double(forKey: "rate_3"),
+                  fee: UserDefaults.standard.double(forKey: "fee"),
+                  levy: UserDefaults.standard.double(forKey: "levy"),
+                  kwh: Double(kwhInput))
+    }
+    
+    
     
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -70,9 +84,18 @@ struct CalculatorView: View {
                             .padding(.leading)
                             .padding(.trailing)
                         
-                        Text("¥" + "\(customRates)")
-                            .font(.title)
-                            .padding()
+                        if UserDefaults.standard.bool(forKey: "isSaved") {
+                            Text("¥" + "\(savedRates)")
+                                .font(.title)
+                                .padding()
+                            
+                        } else {
+                            Text("¥" + "\(editedRates)")
+                                .font(.title)
+                                .padding()
+                            
+                        }
+                        
                         
                         HStack {
                             Text("✎")
@@ -117,6 +140,12 @@ struct CalculatorView: View {
                         .transition(AnyTransition.move(edge: .bottom))
                 }
                 
+                // AdMob
+                BannerAdView(adPosition: .top, adUnitId: MobileAds.myBannerId)
+                    .padding(.top, 60)
+                    .background(.clear)
+                
+
             } // end of ZStack
             .edgesIgnoringSafeArea(.all)
             .onDisappear() {
