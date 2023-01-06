@@ -18,6 +18,7 @@ struct CalculatorView: View {
     // ConverterView setup
     @State var showConverter: Bool = false
 
+    // Load new data passed from EditorView
     private var editedRates: Int {
         Calculate(basicRate: editorRates.editorBR,
                   limit_1: editorRates.editorL1,
@@ -30,6 +31,7 @@ struct CalculatorView: View {
                   kwh: Double(kwhInput))
     }
     
+    // Load old data from UserDefaults
     private var savedRates: Int {
         Calculate(basicRate: UserDefaults.standard.double(forKey: "basicRate"),
                   limit_1: UserDefaults.standard.double(forKey: "limit_1"),
@@ -41,8 +43,6 @@ struct CalculatorView: View {
                   levy: UserDefaults.standard.double(forKey: "levy"),
                   kwh: Double(kwhInput))
     }
-    
-    
     
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -93,9 +93,7 @@ struct CalculatorView: View {
                             Text("¥" + "\(editedRates)")
                                 .font(.title)
                                 .padding()
-                            
                         }
-                        
                         
                         HStack {
                             Text("✎")
@@ -127,7 +125,7 @@ struct CalculatorView: View {
                                 Image(systemName: "w.circle")
                                     .imageScale(.medium)
                                     .foregroundColor(.blue)
-                                    .font(.largeTitle)   
+                                    .font(.largeTitle)
                             }
                         }
                     }
@@ -140,12 +138,6 @@ struct CalculatorView: View {
                         .transition(AnyTransition.move(edge: .bottom))
                 }
                 
-                // AdMob
-                BannerAdView(adPosition: .top, adUnitId: MobileAds.myBannerId)
-                    .padding(.top, 60)
-                    .background(.clear)
-                
-
             } // end of ZStack
             .edgesIgnoringSafeArea(.all)
             .onDisappear() {
@@ -157,7 +149,6 @@ struct CalculatorView: View {
     var disableButton: Bool {
         kwhInput == 0
     }
-    
 }
 
 extension View {
