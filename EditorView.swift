@@ -65,6 +65,7 @@ struct EditorView: View {
     @State private var showingL2Alert = false
     @State private var showingResetWarning = false
     
+    // Use saved data for placeholders in the TextField
     var isSaved = UserDefaults.standard.bool(forKey: "isSaved")
     
     let localeString = Locale.current.language.languageCode?.identifier
@@ -118,13 +119,11 @@ struct EditorView: View {
                     }
                     HStack {
                         Text("More than above to")
-                        
                         TextField(isSaved ? "\(savedLimit_2, specifier: "%.0f")" : "?", value: $l2Input, formatter: Self.formatter)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.numberPad)
                             .foregroundColor(.red)
                             .focused($focusedInput, equals: .l2Input)
-                            
                         Text("kWh")
                         // Add a Japanese word
                         if localeString == "ja" {
@@ -137,7 +136,7 @@ struct EditorView: View {
                             .keyboardType(.decimalPad)
                             .foregroundColor(.red)
                             .focused($focusedInput, equals: .r2Input)
-                            
+    
                     }
                     HStack {
                         if localeString != "ja" {
@@ -149,7 +148,6 @@ struct EditorView: View {
                             Text("kWh")
                             Text("ijyo").font(.caption)
                         }
-                        
                         Text("@")
                         Text("¥")
                         TextField(isSaved ? "\(savedRate_3, specifier: "%.2f")" : "0.00", value: $r3Input, formatter:  Self.formatter)
@@ -157,7 +155,6 @@ struct EditorView: View {
                             .keyboardType(.decimalPad)
                             .foregroundColor(.red)
                             .focused($focusedInput, equals: .r3Input)
-                            
                     }
                 }
                 .listRowBackground(Color.cyan.opacity(0.2))
@@ -172,7 +169,6 @@ struct EditorView: View {
                             .keyboardType(.decimalPad)
                             .foregroundColor(.red)
                             .focused($focusedInput, equals: .feeInput)
-                            
                     }
                     HStack {
                         Text("Renewable Energy Generation Levy") // Renewable Energy Generation Levy
@@ -183,11 +179,9 @@ struct EditorView: View {
                             .keyboardType(.decimalPad)
                             .foregroundColor(.red)
                             .focused($focusedInput, equals: .levyInput)
-                            
                     }
                 }
                 .listRowBackground(Color.cyan.opacity(0.2))
-                
                 
                 // SAVE button
                 Section {
@@ -247,7 +241,6 @@ struct EditorView: View {
                     .foregroundColor(showingResetWarning ? .gray : .red).opacity(0.8)
                     .frame(maxWidth: .infinity, alignment: .center)
                 }
-
             }
             // Numpad config
             .toolbar {
@@ -277,7 +270,6 @@ struct EditorView: View {
                     .alert("Second kWh must be greater than the first kWh", isPresented: $showingL2Alert) {
                         Button("OK", role: .cancel) {}
                     }
-                    
                 }
             }
         }
@@ -286,7 +278,7 @@ struct EditorView: View {
         .background(AppColor._CY)
         .scrollContentBackground(.hidden)
         .onAppear() {
-            // Preload saved rates to TextField
+            // load edited (new) rates to TextField (values are only valid till the app is dismissed)
             if isSaved {
                 self.basicRateInput = editorRates.editorBR
                 self.l1Input = editorRates.editorL1
@@ -313,9 +305,7 @@ struct EditorView: View {
         feeInput.isZero ||
         levyInput.isZero
     }
-    
 }
-
 
 
 struct FormView_Previews: PreviewProvider {
