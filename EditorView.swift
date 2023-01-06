@@ -52,6 +52,15 @@ struct EditorView: View {
     
     @FocusState private var focusedInput: InputItem?
     
+    var savedBasicRate = UserDefaults.standard.double(forKey: "basicRate")
+    var savedLimit_1 = UserDefaults.standard.double(forKey: "limit_1")
+    var savedLimit_2 = UserDefaults.standard.double(forKey: "limit_2")
+    var savedRate_1 = UserDefaults.standard.double(forKey: "rate_1")
+    var savedRate_2 = UserDefaults.standard.double(forKey: "rate_2")
+    var savedRate_3 = UserDefaults.standard.double(forKey: "rate_3")
+    var savedFee = UserDefaults.standard.double(forKey: "fee")
+    var savedLevy = UserDefaults.standard.double(forKey: "levy")
+    
     // Alerts
     @State private var showingL2Alert = false
     @State private var showingResetWarning = false
@@ -75,7 +84,7 @@ struct EditorView: View {
                         Text("Basic Rate")
                         Text("=")
                         Text("¥")
-                        TextField("0.00", value: $basicRateInput, formatter: Self.formatter)
+                        TextField(isSaved ? "\(savedBasicRate, specifier: "%.2f")" : "0.00", value: $basicRateInput, formatter: Self.formatter)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.decimalPad)
                             .foregroundColor(.red)
@@ -87,7 +96,7 @@ struct EditorView: View {
                 Section {
                     HStack {
                         Text("Up to first")
-                        TextField("0", value: $l1Input, formatter: Self.formatter)
+                        TextField(isSaved ? "\(savedLimit_1, specifier: "%.0f")" : "0", value: $l1Input, formatter: Self.formatter)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.numberPad)
                             .foregroundColor(.red)
@@ -100,7 +109,7 @@ struct EditorView: View {
                         }
                         Text("@")
                         Text("¥")
-                        TextField("0.00", value: $r1Input, formatter:  Self.formatter)
+                        TextField(isSaved ? "\(savedRate_1, specifier: "%.2f")" : "0.00", value: $r1Input, formatter:  Self.formatter)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.decimalPad)
                             .foregroundColor(.red)
@@ -110,7 +119,7 @@ struct EditorView: View {
                     HStack {
                         Text("More than above to")
                         
-                        TextField("?", value: $l2Input, formatter: Self.formatter)
+                        TextField(isSaved ? "\(savedLimit_2, specifier: "%.0f")" : "?", value: $l2Input, formatter: Self.formatter)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.numberPad)
                             .foregroundColor(.red)
@@ -123,7 +132,7 @@ struct EditorView: View {
                         }
                         Text("@")
                         Text("¥")
-                        TextField("0.00", value: $r2Input, formatter:  Self.formatter)
+                        TextField(isSaved ? "\(savedRate_2, specifier: "%.2f")" : "0.00", value: $r2Input, formatter:  Self.formatter)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.decimalPad)
                             .foregroundColor(.red)
@@ -143,7 +152,7 @@ struct EditorView: View {
                         
                         Text("@")
                         Text("¥")
-                        TextField("0.00", value: $r3Input, formatter:  Self.formatter)
+                        TextField(isSaved ? "\(savedRate_3, specifier: "%.2f")" : "0.00", value: $r3Input, formatter:  Self.formatter)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.decimalPad)
                             .foregroundColor(.red)
@@ -158,7 +167,7 @@ struct EditorView: View {
                         Text("Fuel Cost Adjustment Fee")   // Fuel Cost Adjustment Fee
                         Text(" = ")
                         Text("¥")
-                        TextField("0.00", value: $feeInput, formatter: Self.formatter)
+                        TextField(isSaved ? "\(savedFee, specifier: "%.2f")" : "0.00", value: $feeInput, formatter: Self.formatter)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.decimalPad)
                             .foregroundColor(.red)
@@ -169,7 +178,7 @@ struct EditorView: View {
                         Text("Renewable Energy Generation Levy") // Renewable Energy Generation Levy
                         Text(" = ")
                         Text("¥")
-                        TextField("0.00", value: $levyInput, formatter: Self.formatter)
+                        TextField(isSaved ? "\(savedLevy, specifier: "%.2f")" : "0.00", value: $levyInput, formatter: Self.formatter)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.decimalPad)
                             .foregroundColor(.red)
