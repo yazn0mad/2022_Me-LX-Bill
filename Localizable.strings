@@ -1,0 +1,60 @@
+/* 
+  Localizable.strings
+  Me LX Bill
+
+  Created by Yazz Tanaka on 03/01/2023.
+  
+*/
+
+// App name
+"CFBundleName" = "ミーの従量電灯";
+"CFBundleDisplayName" = "ミーの従量電灯";
+
+// CalculatorView
+"Meter-Rate Lighting" = "ミーの従量電灯";
+"How much?" = "いくら？";
+"¥" = "¥";
+"✎" = "✎";
+"kWh" = "kWh";
+
+// EditorView
+"Basic Rate" = "基本料金";
+"=" = "=";
+"Up to first" = "最初の";
+"made" = "まで";
+"@" = "@";
+"0.00" = "0.00";
+"More than above to" = "上記以上";
+"Over" = " ";
+"ijyo" = "以上";
+"Fuel Cost Adjustment Fee" = "燃料費調整額";
+"Renewable Energy Generation Levy" = "再エネ発電賦課金";
+"SAVE - value of 0 is not permitted" = "保存 - 0値で無効";
+"SAVE" = "保存";
+"RESET" = "リセット";
+"Your rates will be erased!\nAre you sure?" = "設定値が消去されます。\nよろしいですか？";
+"Cancel" = "キャンセル";
+"Done" = "終了";
+"Next" = "次へ";
+"Second kWh must be greater than the first kWh" = "二列目のkWhは最初のkWh以上の値を入力";
+"OK" = "了解";
+"Customise rates" = "設定値を編集する";
+
+// ConverterView
+"W - kWh Converter" = "W から kWh に変換";
+"Power in watts" = "消費量(ワット)";
+"W" = "W";
+"Usage in hours" = "使用量(時間)";
+"H" = "H";
+"Max 24 Hours!" = "最大 24 (時間)まで";
+"Results" = "結果";
+"kWh / day" = "kWh / 日";
+"kWh / month" = "kWh / 月";
+
+// GuideView
+"Welcome to Me LX Bill" = "ミーの従量電灯アプリについて";
+"This app is fine-tuned for 'Meter-Rate Lighting' contracts offered in Japan. Please refer to your contract and past bills to find your rates." = "このアプリは日本国内で提供されている「従量電灯」に基づいた電気代の計算アプリです。正しく設定するためには料金メニューまたは電気契約書、そして過去の電気代請求書の詳細を参照する必要があります。";
+"Tap " = "こちらの ";
+" to open the editor to customise your rates. Refer to your bills or your service provider's website to find out your 'Fuel Cost Adjustment Fee' and 'Renewable Energy Generation Levy'." = " ボタンをタップしてエディターを開き、料金プランを参照に設定値の入力を行います。燃料費調整額と再エネ発電賦課金の単価は請求書または業者のホームページを参照します。";
+" to open the converter and calculate kWh from watts." = " ボタンをタップしてワットによる電気消費量からkWh使用量を算出することができます。";
+"Got it!" = "了解！";
